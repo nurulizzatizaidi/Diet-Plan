@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Planner Sihat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF4F6;--card:#FFFFFF;--pink:#E58CA5;--pink-soft:#F9D5DE;--pink-deep:#C95E7F;--brown:#5B3A2E;--brown-mid:#8C6252;--brown-soft:#EBD9CF;--line:#F0DDE2;--ok:#7A9A6B;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2A1B17;--card:#3A2823;--pink:#E58CA5;--pink-soft:#5A3540;--pink-deep:#F0A3B8;--brown:#F6E6DD;--brown-mid:#CBA99B;--brown-soft:#4A332C;--line:#4D3730;--ok:#9DBB8E}}
+:root[data-theme="dark"]{--bg:#2A1B17;--card:#3A2823;--pink:#E58CA5;--pink-soft:#5A3540;--pink-deep:#F0A3B8;--brown:#F6E6DD;--brown-mid:#CBA99B;--brown-soft:#4A332C;--line:#4D3730;--ok:#9DBB8E}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--brown);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.45}
+.wrap{max-width:520px;margin:0 auto;padding:18px 16px 110px}
+h1,h2,.num{font-family:"Fraunces",Georgia,"Times New Roman",serif;margin:0}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.top h1{font-size:26px}
+.datebar{display:flex;align-items:center;gap:8px}
+.datebar button{width:38px;height:38px;border-radius:50%;border:0;background:var(--pink-soft);color:var(--brown);font-size:18px;cursor:pointer}
+.datebar span{font-weight:700;min-width:118px;text-align:center}
+.card{background:var(--card);border-radius:22px;padding:18px;margin-bottom:14px;border:1px solid var(--line)}
+.hero{display:flex;align-items:center;gap:18px;background:var(--pink-soft);border-color:transparent}
+.ring{position:relative;width:132px;height:132px;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .num{font-size:30px;font-weight:700;line-height:1}
+.ring small{font-size:12px;color:var(--brown-mid)}
+.hero .side div{margin-bottom:6px;font-size:15px}
+.hero b{font-weight:800}
+.linkbtn{background:none;border:0;color:var(--pink-deep);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer;padding:0}
+.meal h2{font-size:19px;display:flex;justify-content:space-between;align-items:baseline}
+.meal h2 small{font-family:"Nunito",sans-serif;font-size:14px;color:var(--brown-mid);font-weight:600}
+.item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line)}
+.item:last-of-type{border-bottom:0}
+.item button{border:0;background:none;color:var(--brown-mid);font-size:20px;cursor:pointer;padding:0 4px 0 10px}
+.empty{color:var(--brown-mid);font-size:14px;margin:8px 0}
+.add{display:flex;gap:8px;margin-top:10px}
+input{font:inherit;color:var(--brown);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;min-width:0}
+input:focus,button:focus-visible{outline:3px solid var(--pink);outline-offset:1px}
+.add input[type=text]{flex:1}
+.add input[type=number]{width:84px}
+.btn{border:0;border-radius:14px;background:var(--pink-deep);color:#fff;font:inherit;font-weight:800;padding:10px 16px;cursor:pointer}
+:root[data-theme="dark"] .btn{color:#2A1B17}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#2A1B17}}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:10px 0 2px}
+.chip{flex:none;border:1.5px solid var(--pink);background:transparent;color:var(--brown);border-radius:999px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+.chip:active{background:var(--pink-soft)}
+.ex{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.ex:last-child{border-bottom:0}
+.box{width:30px;height:30px;border-radius:10px;border:2px solid var(--pink);flex:none;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
+.ex.done .box{background:var(--ok);border-color:var(--ok)}
+.ex.done .t{text-decoration:line-through;color:var(--brown-mid)}
+.ex .t{font-weight:700}.ex small{display:block;color:var(--brown-mid);font-weight:400}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;font-size:13px}
+.week div{border-radius:14px;padding:8px 0;background:var(--bg)}
+.week .on{background:var(--pink-soft)}.week .full{background:var(--ok);color:#fff}
+.week b{display:block;font-size:15px}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat div{background:var(--bg);border-radius:16px;padding:12px}
+.stat .num{font-size:26px;font-weight:700}.stat small{color:var(--brown-mid)}
+.bar{height:14px;background:var(--brown-soft);border-radius:99px;overflow:hidden;margin:10px 0 4px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--pink-deep));border-radius:99px}
+.note{font-size:13px;color:var(--brown-mid)}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;gap:8px;z-index:5}
+nav button{flex:1;max-width:160px;border:0;border-radius:16px;background:transparent;color:var(--brown-mid);font:inherit;font-weight:700;padding:10px 0;cursor:pointer}
+nav button.on{background:var(--pink-soft);color:var(--brown)}
+.msg{background:var(--brown);color:var(--bg);border-radius:16px;padding:12px 14px;margin-bottom:14px;font-weight:600}
+svg text{font-family:"Nunito",sans-serif}
+@media (max-width:380px){.hero{flex-direction:column;text-align:center}}
+@media (prefers-reduced-motion:no-preference){.bar i,.ring circle.v{transition:all .5s ease}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<nav id="nav"></nav>
+<script>
+var KEY="planner-sihat-v1",START_W=81,GOAL_W=70,START_D="2026-11-13",RAYA="2027-03-10";
+var MEALS=["Sarapan","Tengah hari","Malam","Snek"];
+var QUICK=[["Nasi putih (1 cawan)",200],["Telur rebus",78],["Roti wholemeal (1 keping)",80],["Pisang",105],["Ayam bakar (1 ketul)",200],["Ikan bakar/kukus",150],["Sayur tumis",70],["Tauhu/tempe goreng",90],["Epal",95],["Yogurt kosong",100],["Nasi lemak biasa",450],["Teh tarik",120]];
+var EX={arm:["Latihan lengan","5 minit, dumbbell ringan",40],leg:["Latihan kaki","5 minit, dumbbell ringan",40],abs:["Latihan perut","5 minit, tanpa alat",35],w1:["Jalan 1 batu","15 minit",95],w2:["Jalan 1 batu (kali kedua)","15 minit lagi",95]};
+var PLAN={0:[],1:["arm","leg","abs","w1"],2:["w1","w2"],3:["arm","leg","abs","w1"],4:["w1","w2"],5:["arm","leg","abs","w1"],6:["w1","w2"]};
+var DAYS=["Ahd","Isn","Sel","Rab","Kha","Jum","Sab"],MONTHS=["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ogo","Sep","Okt","Nov","Dis"];
+var S={goal:1750,days:{},weights:[]},view="today",cur=new Date(),flash="";
+try{var raw=localStorage.getItem(KEY);if(raw){S=JSON.parse(raw);S.days=S.days||{};S.weights=S.weights||[];S.goal=S.goal||1750}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function pad(n){return n<10?"0"+n:""+n}
+function dk(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function pd(s){var p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2])}
+function day(k){if(!S.days[k])S.days[k]={food:[],ex:{}};return S.days[k]}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function fmt(d){return d.getDate()+" "+MONTHS[d.getMonth()]}
+function isToday(d){return dk(d)===dk(new Date())}
+function eaten(k){var f=(S.days[k]||{food:[]}).food,t=0;f.forEach(function(x){t+=x.k});return t}
+function burned(k,d){var e=(S.days[k]||{ex:{}}).ex,t=0;for(var id in e){if(e[id]&&EX[id])t+=EX[id][2]}return t}
+function go(v){view=v;render()}
+function shift(n){cur.setDate(cur.getDate()+n);render()}
+function addFood(m){var n=document.getElementById("n"+m),c=document.getElementById("c"+m);var name=n.value.trim(),k=parseInt(c.value,10);if(!name||isNaN(k)||k<0){flash="Isi nama makanan dan kalori dahulu.";render();return}day(dk(cur)).food.push({m:m,n:name,k:k});flash="";save();render()}
+function quick(m,i){var q=QUICK[i];day(dk(cur)).food.push({m:m,n:q[0],k:q[1]});save();render()}
+function del(i){day(dk(cur)).food.splice(i,1);save();render()}
+function tog(id){var d=day(dk(cur));d.ex[id]=!d.ex[id];save();render()}
+function setGoal(){var v=prompt("Sasaran kalori sehari:",S.goal);if(v===null)return;v=parseInt(v,10);if(v>=1000&&v<=4000){S.goal=v;save();render()}else{alert("Masukkan nombor antara 1000 dan 4000.")}}
+function addW(){var el=document.getElementById("wi"),w=parseFloat(el.value);if(isNaN(w)||w<30||w>250){flash="Masukkan berat dalam kg, contoh 80.5";render();return}var k=dk(cur);S.weights=S.weights.filter(function(x){return x.d!==k});S.weights.push({d:k,w:w});S.weights.sort(function(a,b){return a.d<b.d?-1:1});flash="";save();render()}
+function delW(k){S.weights=S.weights.filter(function(x){return x.d!==k});save();render()}
+
+function dateBar(){return '<div class="datebar"><button onclick="shift(-1)" aria-label="Hari sebelum">‹</button><span>'+(isToday(cur)?"Hari ini, ":DAYS[cur.getDay()]+", ")+fmt(cur)+'</span><button onclick="shift(1)" aria-label="Hari selepas">›</button></div>'}
+
+function viewToday(){
+  var k=dk(cur),d=day(k),t=eaten(k),g=S.goal,left=g-t,pct=Math.min(t/g,1),C=2*Math.PI*54;
+  var over=t>g;
+  var h='<div class="card hero"><div class="ring"><svg width="132" height="132" viewBox="0 0 132 132"><circle cx="66" cy="66" r="54" fill="none" stroke="var(--card)" stroke-width="14"/><circle class="v" cx="66" cy="66" r="54" fill="none" stroke="'+(over?"var(--brown-mid)":"var(--pink-deep)")+'" stroke-width="14" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+(C*(1-pct))+'"/></svg><div class="mid"><span class="num">'+Math.abs(left)+'</span><small>'+(over?"kal lebih":"kal berbaki")+'</small></div></div>';
+  h+='<div class="side"><div>Dimakan <b>'+t+'</b> kal</div><div>Sasaran <b>'+g+'</b> kal</div><button class="linkbtn" onclick="setGoal()">Ubah sasaran</button>';
+  if(over)h+='<div class="note" style="margin-top:8px">Sedikit lebih tak apa. Yang penting purata seminggu.</div>';
+  h+='</div></div>';
+  if(flash)h+='<div class="msg">'+esc(flash)+'</div>';
+  MEALS.forEach(function(m){
+    var items=d.food.map(function(f,i){return{f:f,i:i}}).filter(function(x){return x.f.m===m});
+    var sum=0;items.forEach(function(x){sum+=x.f.k});
+    h+='<div class="card meal"><h2>'+m+'<small>'+sum+' kal</small></h2>';
+    if(!items.length)h+='<p class="empty">Belum ada makanan.</p>';
+    items.forEach(function(x){h+='<div class="item"><span>'+esc(x.f.n)+'</span><span><b>'+x.f.k+'</b><button onclick="del('+x.i+')" aria-label="Buang '+esc(x.f.n)+'">×</button></span></div>'});
+    h+='<div class="chips">';QUICK.forEach(function(q,i){h+='<button class="chip" onclick="quick(\''+m+'\','+i+')">'+q[0]+' · '+q[1]+'</button>'});h+='</div>';
+    h+='<div class="add"><input type="text" id="n'+m+'" placeholder="Nama makanan" aria-label="Nama makanan"><input type="number" id="c'+m+'" placeholder="kal" inputmode="numeric" aria-label="Kalori"><button class="btn" onclick="addFood(\''+m+'\')">Tambah</button></div></div>';
+  });
+  h+='<p class="note">Kalori pada butang cepat ialah anggaran. Tulis sendiri kalau awak tahu angka sebenar.</p>';
+  return h;
+}
+
+function viewEx(){
+  var k=dk(cur),d=day(k),dow=cur.getDay(),list=PLAN[dow],e=d.ex;
+  var h='<div class="card"><h2 style="font-size:20px;margin-bottom:4px">'+(list.length?"Senaman hari ini":"Hari rehat")+'</h2>';
+  if(!list.length)h+='<p class="empty">Ahad ialah hari rehat. Badan perlukan masa untuk pulih. Jalan santai kalau nak.</p>';
+  var done=0;
+  list.forEach(function(id){var x=EX[id],on=!!e[id];if(on)done++;h+='<div class="ex'+(on?" done":"")+'" onclick="tog(\''+id+'\')" role="checkbox" aria-checked="'+on+'" tabindex="0" onkeydown="if(event.key===\' \'||event.key===\'Enter\'){event.preventDefault();tog(\''+id+'\')}"><div class="box">'+(on?"✓":"")+'</div><div class="t">'+x[0]+'<small>'+x[1]+'</small></div></div>'});
+  h+='</div>';
+  if(list.length){var b=burned(k);h+='<div class="card stat"><div><span class="num">'+done+'/'+list.length+'</span><br><small>siap hari ini</small></div><div><span class="num">±'+b+'</span><br><small>kalori dibakar (anggaran)</small></div></div>'}
+  h+='<div class="card"><h2 style="font-size:18px;margin-bottom:10px">Minggu ini</h2><div class="week">';
+  var mon=new Date(cur);mon.setDate(cur.getDate()-((cur.getDay()+6)%7));
+  for(var i=0;i<7;i++){var dd=new Date(mon);dd.setDate(mon.getDate()+i);var kk=dk(dd),pl=PLAN[dd.getDay()],c=0;pl.forEach(function(id){if((S.days[kk]||{ex:{}}).ex[id])c++});
+    var cls=!pl.length?"":(c===pl.length?"full":(kk===k?"on":""));
+    h+='<div class="'+cls+'"><b>'+DAYS[dd.getDay()]+'</b>'+(pl.length?c+"/"+pl.length:"rehat")+'</div>'}
+  h+='</div><p class="note" style="margin-top:12px">Isnin, Rabu, Jumaat: kekuatan + 1 jalan. Selasa, Khamis, Sabtu: 2 jalan. Ahad: rehat.</p></div>';
+  return h;
+}
+
+function targetFor(date){var a=pd(START_D),b=pd(RAYA),f=Math.min(Math.max((date-a)/(b-a),0),1);return START_W+(GOAL_W-START_W)*f}
+
+function viewW(){
+  var ws=S.weights,last=ws.length?ws[ws.length-1].w:START_W,lost=START_W-last,total=START_W-GOAL_W,pct=Math.max(0,Math.min(lost/total,1));
+  var dl=Math.ceil((pd(RAYA)-new Date())/86400000);
+  var tgt=targetFor(new Date());
+  var h='';
+  if(flash)h+='<div class="msg">'+esc(flash)+'</div>';
+  h+='<div class="card"><h2 style="font-size:20px">Sasaran 70 kg menjelang Raya</h2><div class="bar"><i style="width:'+(pct*100)+'%"></i></div><div class="note">'+START_W+' kg mula · '+last+' kg sekarang · '+GOAL_W+' kg sasaran</div></div>';
+  h+='<div class="card stat"><div><span class="num">'+(lost>0?"−":"")+Math.abs(lost).toFixed(1)+'</span><br><small>kg sudah turun</small></div><div><span class="num">'+Math.max(last-GOAL_W,0).toFixed(1)+'</span><br><small>kg lagi</small></div><div><span class="num">'+Math.max(dl,0)+'</span><br><small>hari ke 10 Mac</small></div><div><span class="num">'+tgt.toFixed(1)+'</span><br><small>kg sasaran minggu ini</small></div></div>';
+  h+='<div class="card"><h2 style="font-size:18px;margin-bottom:6px">Catat berat</h2><p class="note" style="margin:0 0 10px">Timbang seminggu sekali, waktu pagi sebelum makan. Tarikh ikut hari yang dipilih di atas ('+fmt(cur)+').</p><div class="add"><input type="number" step="0.1" id="wi" placeholder="Berat (kg)" inputmode="decimal" style="flex:1;width:auto" aria-label="Berat dalam kg"><button class="btn" onclick="addW()">Simpan</button></div></div>';
+  // chart
+  var a=pd(START_D),b=pd(RAYA),W=480,H=190,L=34,R=10,T=12,B=26,mn=66,mx=82;
+  function X(d){return L+(Math.min(Math.max((d-a)/(b-a),0),1))*(W-L-R)}
+  function Y(w){return T+(mx-w)/(mx-mn)*(H-T-B)}
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Graf berat badan berbanding sasaran">';
+  [70,74,78,82].forEach(function(v){svg+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="var(--line)"/><text x="4" y="'+(Y(v)+4)+'" font-size="11" fill="var(--brown-mid)">'+v+'</text>'});
+  svg+='<line x1="'+X(a)+'" y1="'+Y(START_W)+'" x2="'+X(b)+'" y2="'+Y(GOAL_W)+'" stroke="var(--brown-mid)" stroke-dasharray="5 5" stroke-width="2"/>';
+  var pts=[{d:START_D,w:START_W}].concat(ws.filter(function(x){return x.d!==START_D}));
+  svg+='<polyline fill="none" stroke="var(--pink-deep)" stroke-width="3" stroke-linejoin="round" points="'+pts.map(function(p){return X(pd(p.d))+","+Y(p.w)}).join(" ")+'"/>';
+  pts.forEach(function(p){svg+='<circle cx="'+X(pd(p.d))+'" cy="'+Y(p.w)+'" r="5" fill="var(--pink-deep)"/>'});
+  svg+='<text x="'+L+'" y="'+(H-6)+'" font-size="11" fill="var(--brown-mid)">13 Nov</text><text x="'+(W-R)+'" y="'+(H-6)+'" font-size="11" text-anchor="end" fill="var(--brown-mid)">10 Mac</text></svg>';
+  h+='<div class="card"><h2 style="font-size:18px;margin-bottom:6px">Perjalanan awak</h2>'+svg+'<p class="note" style="margin:4px 0 0">Garisan merah jambu ialah berat awak. Garisan putus-putus ialah laluan ke 70 kg.</p></div>';
+  if(ws.length){h+='<div class="card"><h2 style="font-size:18px;margin-bottom:6px">Rekod</h2>';ws.slice().reverse().forEach(function(x){h+='<div class="item"><span>'+fmt(pd(x.d))+'</span><span><b>'+x.w+' kg</b><button onclick="delW(\''+x.d+'\')" aria-label="Buang rekod">×</button></span></div>'});h+='</div>'}
+  return h;
+}
+
+function render(){
+  var ae=document.activeElement,keep=ae&&ae.id;
+  var title={today:"Makanan",ex:"Senaman",w:"Berat"}[view];
+  var h='<div class="top"><h1>'+title+'</h1></div>';
+  h+='<div style="margin-bottom:14px">'+dateBar()+'</div>';
+  h+=view==="today"?viewToday():view==="ex"?viewEx():viewW();
+  document.getElementById("app").innerHTML=h;
+  var tabs=[["today","Makanan"],["ex","Senaman"],["w","Berat"]];
+  document.getElementById("nav").innerHTML=tabs.map(function(t){return '<button class="'+(view===t[0]?"on":"")+'" onclick="go(\''+t[0]+'\')">'+t[1]+'</button>'}).join("");
+  flash="";
+}
+render();
+</script>
+</body>
+</html>
